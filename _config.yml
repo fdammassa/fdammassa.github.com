@@ -3,11 +3,11 @@
 # ----------------------- #
 
 url: http://blog.fabriziodammassa.com
-title: Fabrizio D'Ammassa Blog
-subtitle: Another software developer diary
+title: Fabrizio D'Ammassa
+subtitle: A software development lover
 author: Fabrizio D'Ammassa
 simple_search: http://google.com/search
-description:
+description: A collection of posts about software development, mainly focused on Php, Java, Groovy, Javascript.
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
