@@ -1,0 +1,49 @@
+---
+layout: page
+title: "About Me"
+date: 2012-04-10 09:28
+comments: false
+sharing: false
+footer: true
+---
+## Bio sketches ##
+My name is Fabrizio D'Ammassa, I was born in [Sora](http://maps.google.it/maps?q=sora,+fr&hl=it&sll=41.442726,12.392578&sspn=28.611959,67.631836&hnear=Sora+Frosinone,+Lazio&t=h&z=12) and I spent the first 19 years of my life in [Posta Fibreno](http://maps.google.it/maps?q=posta+fibreno,+fr&hl=it&sll=41.716666,13.617597&sspn=0.223212,0.528374&t=m&hnear=Posta+Fibreno+Frosinone,+Lazio&z=14) before moving to Rome to attend the courses of Computer Engineering faculty at [University of Rome Tor Vergata](http://ing.uniroma2.it) where I graduated in 2008 with a master thesis on Model Driven Architecture.
+
+I live in [Frascati](http://maps.google.it/maps?q=frascati&hl=it&sll=41.442726,12.392578&sspn=28.611959,67.631836&hnear=Frascati+Roma,+Lazio&t=m&z=13) with my girlfriend since January 2011, I practice five-a-side football twice a week, I would improve my English and play the piano more frequently, I drive a [Lancia Delta](http://www.lancianewdelta.it) but I hate Rome disorderly traffic.
+
+I have been working for 2 years at [Coresecure](www.coresecure.com) as web developer (and much more) and Google Analytics consultant where I had a great time learning advanced web development techniques and products such as [Magento](http://www.magentocommerce.com/) and [Grails](http://grails.org/).
+I currently work as System Engineer at [Nextant](www.nextant.it) in the field of Air Traffic Management. Since the end of 2011 I work also as freelance [software engineer](www.fabriziodammassa.com)  with primary focus on web applications (php and java most common stacks).
+
+My first computer was the Commodore64, I wrote my first program in QuickBasic when I was 10 years old. After a big pause (you know... girls, sport...) of about 8 years, I fell in love with programming again (and forever) at 19.
+
+I manage my own [VPS](http://www.flarevm.it) that I use as development and test environment (I chose [Ubuntu](http://www.ubuntu.com) as Linux distribution).
+
+#### Wish-to-learn-list ####
+
+* Agile methods (Scrum and XP)
+* Rails
+* Python with focus on web development
+* GIS
+* Behavior Driven Development
+* Continuous Integration
+* Test Driven Development
+* NoSql
+* Web scaling techinques
+* Node.js
+* Javascript frameworks (Backbone, CanJs)
+
+## What is this blog about? ##
+
+1. Web development stacks tips and tuts (Php, Groovy, Ruby, Python, Javascript)
+2. Lessons learned from real life projects
+3. Everything I learn from the evolving items of the *wish-to-learn-list* and that I consider useful to share with others 
+
+## Keep in touch ##
+
+* My blog
+* **E-mail** ``fabrizio.dammassa@gmail.com``
+* **Skype** ``fdammassa``
+* [Twitter](https://twitter.com/#!/fdammassa)
+* [LinkedIn](http://www.linkedin.com/in/fdammassa)
+
+
