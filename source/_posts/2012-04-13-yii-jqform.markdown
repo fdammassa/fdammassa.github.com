@@ -5,22 +5,25 @@ date: 2012-04-13 11:14
 comments: true
 sharing: true
 footer: true
-categories: [yii jquery jqform]
+categories: 
+- yii 
+- jquery 
+- jqform
+- ajax
 ---
 
 [Yii](http://www.yiiframework.com) is a *"Fast, Secure and Professional PHP framework"*.
 
-I abandoned CodeIgniter in favour of Yii a few months ago and I have already delivered two successful projects using the latter one.
-
 Among the interesting features offered by Yii, there is one that has been a real headache: the form widget and the client-side validation.
 Yii framework allows you to define validation rules in the model classes and then it generates the javascript code to perform validation also on the client. The js code is generated on [CActiveForm](http://www.yiiframework.com/doc/api/1.1/CActiveForm) widget rendering. When the user submits the form, the validatio code is executed on the browser and if everything is fine, the data are sent to the server.
+
+<!-- more -->
 
 ## Problem ##
 Till now, everything looks awesome, but at some point I needed to let [jqForm](http://jquery.malsup.com/form/) jQuery plugin to handle the Ajax form submission. **BUT** I would love to keep the Yii generated javascript validation. ** AND ** I don't want to change the Yii javascript library code.
 
 ## Solution ##
 ** EVENTS!! ** Yes, the Yii form widget allows you to specify a javascript function that is called after client-side validation. 
-<!-- more -->
 This is what should happend once the Yii submit listener intercepts the submit button click event:
 
 * prevents default form submission
@@ -39,7 +42,7 @@ The "afterValidate" function should be designed to perform at least three tasks:
 In the form view file:
 
 ``` php
-Yii::app()->clientScript->registerScriptFile('/js/jquery.form.js');
+<?php Yii::app()->clientScript->registerScriptFile('/js/jquery.form.js'); ?>
 ```
 This code tells Yii to include the *jquery.form.js* file in the html page header.
 
@@ -47,6 +50,8 @@ This code tells Yii to include the *jquery.form.js* file in the html page header
 In the form view file:
 
 ``` php
+<?php 
+
 Yii::app()->clientScript->registerScript('yiijqform', "
    function myAfterValidateFunction(form, data, hasError)
    {
@@ -69,6 +74,9 @@ Yii::app()->clientScript->registerScript('yiijqform', "
    }
        
 ", CClientScript::POS_HEAD);
+
+?>
+
 ```
 
 When the myAfterValidateFunction is invoked, the form is Ajax submitted through the ajaxSubmit function defined in the jqForm plugin. Please be sure to check for the <code>hasError</code> paramter that contains the result of the client-side validation. If it is <code>false</code>, the form shouldn't be submitted to the server.
@@ -79,6 +87,7 @@ The <code>return false</code> at the end of the function body prevents the flow 
 In the form view file:
 
 ``` php
+<?php 
 $form = $this->beginWidget('CActiveForm', array(
     'id'=>'myform_id',
     'action'=>array('/my/action'),
@@ -89,6 +98,7 @@ $form = $this->beginWidget('CActiveForm', array(
         'afterValidate'=>'js:myAfterValidateFunction'
     )
 ));
+?>
 ```
 As you can see, attaching a javascript function to afterValidate event is pretty simple using the CActiveForm widget options. 
 
