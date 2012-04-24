@@ -14,6 +14,8 @@ I have been working for some years with [svn](http://subversion.apache.org) and 
 
 In this post I don't want to list pros or cons of git versus svn or viceversa but I'd like to share a very simple worflow I've adopted to manage my live and dev environments and to keep them in sync through git.
 
+<!-- more -->
+
 ## Setup ##
 ### Live Server ###
 
