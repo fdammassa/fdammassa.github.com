@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A simple git workflow - Fabrizio D'Ammassa</title>
+  <meta name="author" content="Fabrizio D'Ammassa">
+
+  
+  <meta name="description" content="I have been working for some years with svn and I was happy with it. But I have to admit that git is very cool as well and I started using it a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://fdammassa.github.com/blog/2012/04/24/simple-git-workflow">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Fabrizio D'Ammassa" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fabrizio D'Ammassa</a></h1>
+  
+    <h2>A software development lover</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:fdammassa.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">A Simple Git Workflow</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-24T11:49:00+02:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I have been working for some years with <a href="http://subversion.apache.org">svn</a> and I was happy with it. But I have to admit that <a href="http://git-scm.com">git</a> is very cool as well and I started using it a couple months ago. No regrets till now :)</p>
+
+<p>In this post I don&#8217;t want to list pros or cons of git versus svn or viceversa but I&#8217;d like to share a very simple worflow I&#8217;ve adopted to manage my live and dev environments and to keep them in sync through git.</p>
+
+<!-- more -->
+
+
+<h2>Setup</h2>
+
+<h3>Live Server</h3>
+
+<p>You need to create a bare repository (that we called newrepo.git) somewhere in your live server. I&#8217;m assuming that the <code>/var/git/repo</code> directory has been previously created.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /var/git/repo
+</span><span class='line'>mkdir newrepo.git
+</span><span class='line'><span class="nb">cd </span>newrepo.git
+</span><span class='line'>git init --bare
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As second step, you should clone the newrepo.git to your webserver root directory, assuming this repo will contain the website files you are working on.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /var/www
+</span><span class='line'>git clone /var/git/repo/newrepo.git newsite
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Development Server</h3>
+
+<p>On your development server, you have to clone the same repository newrepo.git. It is worth to note that the clone has been added the remote url automatically since you are cloning through ssh protocol.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /var/www
+</span><span class='line'>git clone ssh://myuser@myliveserver.com/var/git/repo/newrepo.git newsite
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Deploy local changes</h2>
+
+<h3>Development Server</h3>
+
+<p>First of all, you should to prevent web access to the .git directory (differently from svn, it exitsts only at your clone root) by creating a <code>.htaccess</code> file at the same level of <code>.git</code> folder.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /var/www/newsite
+</span><span class='line'>touch .htaccess
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>.htaccess</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># deny access to the top-level git repository:</span>
+</span><span class='line'>RewriteEngine On
+</span><span class='line'>RewriteRule <span class="se">\.</span>git - <span class="o">[</span>F,L<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now add your first extra-complicated index file :)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">echo</span> <span class="s1">&#39;Hello World!&#39;</span> &gt;&gt; index.html
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And sync the changes with your local repository.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git add .
+</span><span class='line'>git commit -m <span class="s2">&quot;.git folder protected from web access&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Last step consists of pushing local changes to the remote repository (with &#8216;remote repository&#8217; I mean the one on live-server at <code>/var/git/repo/newrepo.git</code> path).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git push origin master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Live Server</h3>
+
+<p>Finally, pull down changes from the newrepo.git repository to the clone in your web server root directory.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /var/www/newsite
+</span><span class='line'>git pull origin master
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Fabrizio D'Ammassa</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-24T11:49:00+02:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/deploy/'>deploy</a>, <a class='category' href='/blog/categories/git/'>git</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://fdammassa.github.com/blog/2012/04/24/simple-git-workflow/" data-via="fdammassa" data-counturl="http://fdammassa.github.com/blog/2012/04/24/simple-git-workflow/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/17/ajax-file-upload/" title="Previous Post: AJAX upload on old browsers">&laquo; AJAX upload on old browsers</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/02/08/new-professional-website/" title="Next Post: My presentation-oriented Website">My presentation-oriented Website &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/02/08/new-professional-website/">My presentation-oriented Website</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/24/simple-git-workflow/">A simple git workflow</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/17/ajax-file-upload/">AJAX upload on old browsers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/13/yii-jqform/">Yii and jQuery Form plugin</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/fdammassa">@fdammassa</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'fdammassa',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("fdammassa", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/fdammassa" class="twitter-follow-button" data-show-count="true">Follow @fdammassa</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Fabrizio D'Ammassa
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'fabriziodammassa-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://fdammassa.github.com/blog/2012/04/24/simple-git-workflow/';
+        var disqus_url = 'http://fdammassa.github.com/blog/2012/04/24/simple-git-workflow/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

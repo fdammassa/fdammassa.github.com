@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: upload | Fabrizio D'Ammassa]]></title>
+  <link href="http://fdammassa.github.com/blog/categories/upload/atom.xml" rel="self"/>
+  <link href="http://fdammassa.github.com/"/>
+  <updated>2013-02-08T12:59:47+01:00</updated>
+  <id>http://fdammassa.github.com/</id>
+  <author>
+    <name><![CDATA[Fabrizio D'Ammassa]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AJAX upload on old browsers]]></title>
+    <link href="http://fdammassa.github.com/blog/2012/04/17/ajax-file-upload/"/>
+    <updated>2012-04-17T15:32:00+02:00</updated>
+    <id>http://fdammassa.github.com/blog/2012/04/17/ajax-file-upload</id>
+    <content type="html"><![CDATA[<p>Web browsers supporting only XMLHTTPRequest Level 1 are not so uncommon and if you want to upload file using AJAX you should follow a few simple rules.</p>
+
+<p>There is plenty of <a href="http://superdit.com/2010/06/29/10-jquery-ajax-file-uploader-plugins/">sophisticated libraries</a> to manage ajax file upload. Being a fan of <a href="http://jquery.malsup.com/form/">jqForm</a> that I massively use in the frontend of my applications, I decided to stick on that for this tut.</p>
+
+<!-- more -->
+
+
+<h2>Problem</h2>
+
+<p>Let's consider <a href="http://jquery.malsup.com/form/#file-upload">the example</a> on the jqForm website. As explicitly explained, there are some limitations for old browsers when you need to get a JSON response back from server.</p>
+
+<blockquote><p>"Browsers that support the XMLHttpRequest Level 2 will be able to upload files seamlessly and even get progress updates as the upload proceeds. For older browsers, a fallback technology is used which involves iframes since it is not possible to upload files using the level 1 implmenentation of the XMLHttpRequest object. This is a common fallback technique, but it has inherent limitations. The iframe element is used as the target of the form's submit operation which means that the server response is written to the iframe. This is fine if the response type is HTML or XML, but doesn't work as well if the response type is script or JSON, both of which often contain characters that need to be repesented using entity references when found in HTML markup."</p></blockquote>
+
+<p>Official jqForm documentation suggests to modify the <a href="http://jquery.malsup.com/form/files-raw.php">server side code</a> to let it send back the JSON data between a <code> &lt;textarea&gt; </code> tags.
+I don't dislike their solution but I found an alternative that worked worked pretty well in a couple of my web apps and maybe it is simpler.</p>
+
+<h2>Solution</h2>
+
+<h3>Server Side Code (Php)</h3>
+
+<p>``` php
+&lt;?php</p>
+
+<p>// process uploaded file</p>
+
+<p>$data = array();</p>
+
+<p>// populate $data with the json data to return</p>
+
+<p>echo json_encode($data);
+?>
+```</p>
+
+<p>As you can see, I have voluntarily not specified the response Content-Type to workaround the problem we are addressing.</p>
+
+<h3>Client Side Code (Javascript)</h3>
+
+<p>``` javascript</p>
+
+<script type="text/Javascript">
+ // I'm assuming that the form id is "myUploadForm"
+ $('#myUploadForm').ajaxForm({
+        beforeSubmit: function(a,f,o) {
+            // show loader gif
+        },
+        success: function(data) {
+            // here we get raw data, not yet encoded in JSON object
+            var json_data = null;
+            try{
+                json_data = jQuery.parseJSON(data);
+                // make something with json_data
+            }
+            catch(e)
+            {
+                alert('Ops, something went wrong :(');
+            }
+        },
+        complete: function()
+        {
+            // hide loader gif
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            alert('Ops, something went wrong :(');
+        }
+    });
+</script>
+
+
+<p>```</p>
+
+<p>Don't set the Content-Type in the server response and let jQuery intelligently guess the response content type ( take a look at <a href="http://api.jquery.com/jQuery.ajax/">datatype</a> option specifications ).</p>
+]]></content>
+  </entry>
+  
+</feed>

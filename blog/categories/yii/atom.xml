@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: yii | Fabrizio D'Ammassa]]></title>
+  <link href="http://fdammassa.github.com/blog/categories/yii/atom.xml" rel="self"/>
+  <link href="http://fdammassa.github.com/"/>
+  <updated>2013-02-08T12:59:47+01:00</updated>
+  <id>http://fdammassa.github.com/</id>
+  <author>
+    <name><![CDATA[Fabrizio D'Ammassa]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Yii and jQuery Form plugin]]></title>
+    <link href="http://fdammassa.github.com/blog/2012/04/13/yii-jqform/"/>
+    <updated>2012-04-13T11:14:00+02:00</updated>
+    <id>http://fdammassa.github.com/blog/2012/04/13/yii-jqform</id>
+    <content type="html"><![CDATA[<p><a href="http://www.yiiframework.com">Yii</a> is a <em>"Fast, Secure and Professional PHP framework"</em>.</p>
+
+<p>Among the interesting features offered by Yii, there is one that has been a real headache: the form widget and the client-side validation.
+Yii framework allows you to define validation rules in the model classes and then it generates the javascript code to perform validation also on the client. The js code is generated on <a href="http://www.yiiframework.com/doc/api/1.1/CActiveForm">CActiveForm</a> widget rendering. When the user submits the form, the validatio code is executed on the browser and if everything is fine, the data are sent to the server.</p>
+
+<!-- more -->
+
+
+<h2>Problem</h2>
+
+<p>Till now, everything looks awesome, but at some point I needed to let <a href="http://jquery.malsup.com/form/">jqForm</a> jQuery plugin to handle the Ajax form submission. <strong>BUT</strong> I would love to keep the Yii generated javascript validation. <strong> AND </strong> I don't want to change the Yii javascript library code.</p>
+
+<h2>Solution</h2>
+
+<p><strong> EVENTS!! </strong> Yes, the Yii form widget allows you to specify a javascript function that is called after client-side validation.
+This is what should happend once the Yii submit listener intercepts the submit button click event:</p>
+
+<ul>
+<li>prevents default form submission</li>
+<li>validate user input</li>
+<li>executes the "afterValidate" function, if any</li>
+<li>if validation is ok, it submits the form to the server</li>
+</ul>
+
+
+<p>The "afterValidate" function should be designed to perform at least three tasks:</p>
+
+<ul>
+<li>check that the validation was successful</li>
+<li>if user inputs have been validated, submit the form using jqForm plugin</li>
+<li>prevent the form submission by the Yii javascript library</li>
+</ul>
+
+
+<h3>Import jqForm library</h3>
+
+<p>In the form view file:</p>
+
+<p><code>php
+&lt;?php Yii::app()-&gt;clientScript-&gt;registerScriptFile('/js/jquery.form.js'); ?&gt;
+</code>
+This code tells Yii to include the <em>jquery.form.js</em> file in the html page header.</p>
+
+<h3>Define afterValidate function</h3>
+
+<p>In the form view file:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>Yii::app()->clientScript->registerScript('yiijqform', "
+   function myAfterValidateFunction(form, data, hasError)
+   {</p>
+
+<pre><code>    if(!hasError)
+    {
+        $(form).ajaxSubmit({
+            dataType: 'json',
+            timeout: 10000,                
+            success: function(data)
+            {
+                // do something
+            },
+            error: function(xhr)
+            {
+                alert('ops...');
+            }
+        });
+    }
+    return false;
+</code></pre>
+
+<p>   }</p>
+
+<p>", CClientScript::POS_HEAD);</p>
+
+<p>?></p>
+
+<p>```</p>
+
+<p>When the myAfterValidateFunction is invoked, the form is Ajax submitted through the ajaxSubmit function defined in the jqForm plugin. Please be sure to check for the <code>hasError</code> paramter that contains the result of the client-side validation. If it is <code>false</code>, the form shouldn't be submitted to the server.</p>
+
+<p>The <code>return false</code> at the end of the function body prevents the flow of Yii javascript form submission handler to be resumed. Otherwise, the form would be submitted twice!</p>
+
+<h3>Attach function to afterValidate event</h3>
+
+<p>In the form view file:</p>
+
+<p>``` php
+&lt;?php
+$form = $this->beginWidget('CActiveForm', array(</p>
+
+<pre><code>'id'=&gt;'myform_id',
+'action'=&gt;array('/my/action'),
+'enableClientValidation'=&gt;true,
+'clientOptions'=&gt;array(
+    'validateOnSubmit'=&gt;true,
+    'validateOnChange'=&gt;false,
+    'afterValidate'=&gt;'js:myAfterValidateFunction'
+)
+</code></pre>
+
+<p>));
+?>
+```
+As you can see, attaching a javascript function to afterValidate event is pretty simple using the CActiveForm widget options.</p>
+
+<h3>Final thoughts</h3>
+
+<p>As you can see, integrating jqForm with Yii javascript libraries is quite easy once you know how to hook your code without touching framework core files. Fortunately Yii framework is very well documented and the source code can be understood by experienced Php developers. If you know more elegant ways to accomplish this task, please drop me a line via e-mail or comment below.</p>
+]]></content>
+  </entry>
+  
+</feed>

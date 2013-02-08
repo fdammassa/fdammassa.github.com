@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>AJAX upload on old browsers - Fabrizio D'Ammassa</title>
+  <meta name="author" content="Fabrizio D'Ammassa">
+
+  
+  <meta name="description" content="Web browsers supporting only XMLHTTPRequest Level 1 are not so uncommon and if you want to upload file using AJAX you should follow a few simple &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://fdammassa.github.com/blog/2012/04/17/ajax-file-upload">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Fabrizio D'Ammassa" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fabrizio D'Ammassa</a></h1>
+  
+    <h2>A software development lover</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:fdammassa.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">AJAX Upload on Old Browsers</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T15:32:00+02:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Web browsers supporting only XMLHTTPRequest Level 1 are not so uncommon and if you want to upload file using AJAX you should follow a few simple rules.</p>
+
+<p>There is plenty of <a href="http://superdit.com/2010/06/29/10-jquery-ajax-file-uploader-plugins/">sophisticated libraries</a> to manage ajax file upload. Being a fan of <a href="http://jquery.malsup.com/form/">jqForm</a> that I massively use in the frontend of my applications, I decided to stick on that for this tut.</p>
+
+<!-- more -->
+
+
+<h2>Problem</h2>
+
+<p>Let&#8217;s consider <a href="http://jquery.malsup.com/form/#file-upload">the example</a> on the jqForm website. As explicitly explained, there are some limitations for old browsers when you need to get a JSON response back from server.</p>
+
+<blockquote><p>&#8220;Browsers that support the XMLHttpRequest Level 2 will be able to upload files seamlessly and even get progress updates as the upload proceeds. For older browsers, a fallback technology is used which involves iframes since it is not possible to upload files using the level 1 implmenentation of the XMLHttpRequest object. This is a common fallback technique, but it has inherent limitations. The iframe element is used as the target of the form&#8217;s submit operation which means that the server response is written to the iframe. This is fine if the response type is HTML or XML, but doesn&#8217;t work as well if the response type is script or JSON, both of which often contain characters that need to be repesented using entity references when found in HTML markup.&#8221;</p></blockquote>
+
+<p>Official jqForm documentation suggests to modify the <a href="http://jquery.malsup.com/form/files-raw.php">server side code</a> to let it send back the JSON data between a <code> &lt;textarea&gt; </code> tags.
+I don&#8217;t dislike their solution but I found an alternative that worked worked pretty well in a couple of my web apps and maybe it is simpler.</p>
+
+<h2>Solution</h2>
+
+<h3>Server Side Code (Php)</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// process uploaded file</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// populate $data with the json data to return</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">echo</span> <span class="nx">json_encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, I have voluntarily not specified the response Content-Type to workaround the problem we are addressing.</p>
+
+<h3>Client Side Code (Javascript)</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/Javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'> <span class="c1">// I&#39;m assuming that the form id is &quot;myUploadForm&quot;</span>
+</span><span class='line'> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#myUploadForm&#39;</span><span class="p">).</span><span class="nx">ajaxForm</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">beforeSubmit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">f</span><span class="p">,</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="c1">// show loader gif</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="c1">// here we get raw data, not yet encoded in JSON object</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">json_data</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">try</span><span class="p">{</span>
+</span><span class='line'>              <span class="nx">json_data</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">parseJSON</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span><span class='line'>              <span class="c1">// make something with json_data</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">{</span>
+</span><span class='line'>              <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Ops, something went wrong :(&#39;</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">complete</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>          <span class="c1">// hide loader gif</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">error</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">jqXHR</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">errorThrown</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>          <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Ops, something went wrong :(&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Don&#8217;t set the Content-Type in the server response and let jQuery intelligently guess the response content type ( take a look at <a href="http://api.jquery.com/jQuery.ajax/">datatype</a> option specifications ).</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Fabrizio D'Ammassa</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T15:32:00+02:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ajax/'>ajax</a>, <a class='category' href='/blog/categories/jqform/'>jqform</a>, <a class='category' href='/blog/categories/upload/'>upload</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://fdammassa.github.com/blog/2012/04/17/ajax-file-upload/" data-via="fdammassa" data-counturl="http://fdammassa.github.com/blog/2012/04/17/ajax-file-upload/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/13/yii-jqform/" title="Previous Post: Yii and jQuery Form plugin">&laquo; Yii and jQuery Form plugin</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/04/24/simple-git-workflow/" title="Next Post: A simple git workflow">A simple git workflow &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/02/08/new-professional-website/">My presentation-oriented Website</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/24/simple-git-workflow/">A simple git workflow</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/17/ajax-file-upload/">AJAX upload on old browsers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/13/yii-jqform/">Yii and jQuery Form plugin</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/fdammassa">@fdammassa</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'fdammassa',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("fdammassa", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/fdammassa" class="twitter-follow-button" data-show-count="true">Follow @fdammassa</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Fabrizio D'Ammassa
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'fabriziodammassa-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://fdammassa.github.com/blog/2012/04/17/ajax-file-upload/';
+        var disqus_url = 'http://fdammassa.github.com/blog/2012/04/17/ajax-file-upload/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

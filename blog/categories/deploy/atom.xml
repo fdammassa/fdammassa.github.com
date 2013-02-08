@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: deploy | Fabrizio D'Ammassa]]></title>
+  <link href="http://fdammassa.github.com/blog/categories/deploy/atom.xml" rel="self"/>
+  <link href="http://fdammassa.github.com/"/>
+  <updated>2013-02-08T12:59:47+01:00</updated>
+  <id>http://fdammassa.github.com/</id>
+  <author>
+    <name><![CDATA[Fabrizio D'Ammassa]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A simple git workflow]]></title>
+    <link href="http://fdammassa.github.com/blog/2012/04/24/simple-git-workflow/"/>
+    <updated>2012-04-24T11:49:00+02:00</updated>
+    <id>http://fdammassa.github.com/blog/2012/04/24/simple-git-workflow</id>
+    <content type="html"><![CDATA[<p>I have been working for some years with <a href="http://subversion.apache.org">svn</a> and I was happy with it. But I have to admit that <a href="http://git-scm.com">git</a> is very cool as well and I started using it a couple months ago. No regrets till now :)</p>
+
+<p>In this post I don't want to list pros or cons of git versus svn or viceversa but I'd like to share a very simple worflow I've adopted to manage my live and dev environments and to keep them in sync through git.</p>
+
+<!-- more -->
+
+
+<h2>Setup</h2>
+
+<h3>Live Server</h3>
+
+<p>You need to create a bare repository (that we called newrepo.git) somewhere in your live server. I'm assuming that the <code>/var/git/repo</code> directory has been previously created.</p>
+
+<p><code>bash
+cd /var/git/repo
+mkdir newrepo.git
+cd newrepo.git
+git init --bare
+</code></p>
+
+<p>As second step, you should clone the newrepo.git to your webserver root directory, assuming this repo will contain the website files you are working on.</p>
+
+<p><code>bash
+cd /var/www
+git clone /var/git/repo/newrepo.git newsite
+</code></p>
+
+<h3>Development Server</h3>
+
+<p>On your development server, you have to clone the same repository newrepo.git. It is worth to note that the clone has been added the remote url automatically since you are cloning through ssh protocol.</p>
+
+<p><code>bash
+cd /var/www
+git clone ssh://myuser@myliveserver.com/var/git/repo/newrepo.git newsite
+</code></p>
+
+<h2>Deploy local changes</h2>
+
+<h3>Development Server</h3>
+
+<p>First of all, you should to prevent web access to the .git directory (differently from svn, it exitsts only at your clone root) by creating a <code>.htaccess</code> file at the same level of <code>.git</code> folder.</p>
+
+<p><code>bash
+cd /var/www/newsite
+touch .htaccess
+</code></p>
+
+<p>``` bash .htaccess</p>
+
+<h1>deny access to the top-level git repository:</h1>
+
+<p>RewriteEngine On
+RewriteRule .git - [F,L]
+```</p>
+
+<p>Now add your first extra-complicated index file :)
+<code>bash
+echo 'Hello World!' &gt;&gt; index.html
+</code></p>
+
+<p>And sync the changes with your local repository.
+<code>bash
+git add .
+git commit -m ".git folder protected from web access"
+</code></p>
+
+<p>Last step consists of pushing local changes to the remote repository (with 'remote repository' I mean the one on live-server at <code>/var/git/repo/newrepo.git</code> path).
+<code>bash
+git push origin master
+</code></p>
+
+<h3>Live Server</h3>
+
+<p>Finally, pull down changes from the newrepo.git repository to the clone in your web server root directory.
+<code>bash
+cd /var/www/newsite
+git pull origin master
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>http://fdammassa.github.com/blog/2012/04/13/yii-jqform/</loc>
+        <lastmod>2013-02-08T12:04:21+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://fdammassa.github.com/blog/2012/04/17/ajax-file-upload/</loc>
+        <lastmod>2013-02-08T12:04:21+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://fdammassa.github.com/blog/2012/04/24/simple-git-workflow/</loc>
+        <lastmod>2013-02-08T12:04:21+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://fdammassa.github.com/blog/2013/02/08/new-professional-website/</loc>
+        <lastmod>2013-02-08T12:59:04+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://fdammassa.github.com/blog/archives/</loc>
+        <lastmod>2013-02-08T12:59:04+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://fdammassa.github.com/</loc>
+        <lastmod>2013-02-08T12:59:04+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://fdammassa.github.com/about/</loc>
+        <lastmod>2013-02-08T12:04:21+01:00</lastmod>
+    </url>
+</urlset>

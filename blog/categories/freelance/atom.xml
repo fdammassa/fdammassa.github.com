@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: freelance | Fabrizio D'Ammassa]]></title>
+  <link href="http://fdammassa.github.com/blog/categories/freelance/atom.xml" rel="self"/>
+  <link href="http://fdammassa.github.com/"/>
+  <updated>2013-02-08T12:59:47+01:00</updated>
+  <id>http://fdammassa.github.com/</id>
+  <author>
+    <name><![CDATA[Fabrizio D'Ammassa]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My presentation-oriented Website]]></title>
+    <link href="http://fdammassa.github.com/blog/2013/02/08/new-professional-website/"/>
+    <updated>2013-02-08T12:12:00+01:00</updated>
+    <id>http://fdammassa.github.com/blog/2013/02/08/new-professional-website</id>
+    <content type="html"><![CDATA[<p>Last week I launched my <a href="http://www.fabriziodammassa.com" title="Fabrizio D'Ammassa Professional Website">new professional website</a> to advertise myself as freelance software developer or as contributor to open source projects.</p>
+
+<p>I decided to phase out Wordpress due to three reasons:</p>
+
+<ul>
+<li>my site was composed of a few static pages, no comments, no articles</li>
+<li>I'm too lazy to keep Wordpress up to date (at least to fix security issues)</li>
+<li>I'd like to present my self in an original manner</li>
+</ul>
+
+
+<p>My idea was to design my professional website as a presentation so I started searching for a slide-engine with the following capabilities:</p>
+
+<ul>
+<li>easy to setup</li>
+<li>HTML5 compliant</li>
+<li>coming with some nice built-in themes</li>
+<li>nice-looking on mobile devices</li>
+</ul>
+
+
+<p><a href="http://lab.hakim.se/reveal-js/" title="Reveal.js">Reveal.js</a> was the answer!</p>
+
+<p>After a rapid prototyping of the required sections of the site, I could set up my new website in a couple of hours, just 10 lines of javascript and well structured HTML5 code
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Reveal.js initialization  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Reveal</span><span class="p">.</span><span class="nx">initialize</span><span class="p">({</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">controls</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'><span class="nx">progress</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'><span class="nx">history</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'><span class="nx">center</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">theme</span><span class="o">:</span> <span class="nx">Reveal</span><span class="p">.</span><span class="nx">getQueryHash</span><span class="p">().</span><span class="nx">theme</span><span class="p">,</span>
+</span><span class='line'><span class="nx">transition</span><span class="o">:</span> <span class="nx">Reveal</span><span class="p">.</span><span class="nx">getQueryHash</span><span class="p">().</span><span class="nx">transition</span> <span class="o">||</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Optional libraries used to extend on reveal.js</span>
+</span><span class='line'><span class="nx">dependencies</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span> <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;lib/js/classList.js&#39;</span><span class="p">,</span> <span class="nx">condition</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">classList</span><span class="p">;</span> <span class="p">}</span> <span class="p">},</span>
+</span><span class='line'>    <span class="p">{</span> <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;plugin/highlight/highlight.js&#39;</span><span class="p">,</span> <span class="nx">async</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">hljs</span><span class="p">.</span><span class="nx">initHighlightingOnLoad</span><span class="p">();</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'><span class="p">]</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>And here you are!!</h2>
+
+<p><a href="http://www.fabriziodammassa.com"><img class="left" src="/images/fabriziodammassa.com.png" width="350" title="fabriziodammassa.com" ></a>
+<a href="http://www.fabriziodammassa.com/#/4"><img src="/images/skills_expertise.png" width="370" title="Skills and Expertise" ></a></p>
+
+<div style="clear:both">
+</div>
+
+
+<p>Maybe it is still a bit spartan, but it is also effective and that was my first requirement.</p>
+
+<p>If you have ideas or suggestions to improve it, don't esistate to share, it's still a work in progress...</p>
+]]></content>
+  </entry>
+  
+</feed>

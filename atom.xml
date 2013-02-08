@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Fabrizio D'Ammassa]]></title>
+  <link href="http://fdammassa.github.com/atom.xml" rel="self"/>
+  <link href="http://fdammassa.github.com/"/>
+  <updated>2013-02-08T12:59:47+01:00</updated>
+  <id>http://fdammassa.github.com/</id>
+  <author>
+    <name><![CDATA[Fabrizio D'Ammassa]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My presentation-oriented Website]]></title>
+    <link href="http://fdammassa.github.com/blog/2013/02/08/new-professional-website/"/>
+    <updated>2013-02-08T12:12:00+01:00</updated>
+    <id>http://fdammassa.github.com/blog/2013/02/08/new-professional-website</id>
+    <content type="html"><![CDATA[<p>Last week I launched my <a href="http://www.fabriziodammassa.com" title="Fabrizio D'Ammassa Professional Website">new professional website</a> to advertise myself as freelance software developer or as contributor to open source projects.</p>
+
+<p>I decided to phase out Wordpress due to three reasons:</p>
+
+<ul>
+<li>my site was composed of a few static pages, no comments, no articles</li>
+<li>I&#8217;m too lazy to keep Wordpress up to date (at least to fix security issues)</li>
+<li>I&#8217;d like to present my self in an original manner</li>
+</ul>
+
+
+<p>My idea was to design my professional website as a presentation so I started searching for a slide-engine with the following capabilities:</p>
+
+<ul>
+<li>easy to setup</li>
+<li>HTML5 compliant</li>
+<li>coming with some nice built-in themes</li>
+<li>nice-looking on mobile devices</li>
+</ul>
+
+
+<p><a href="http://lab.hakim.se/reveal-js/" title="Reveal.js">Reveal.js</a> was the answer!</p>
+
+<p>After a rapid prototyping of the required sections of the site, I could set up my new website in a couple of hours, just 10 lines of javascript and well structured HTML5 code</p>
+
+<figure class='code'><figcaption><span>Reveal.js initialization  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Reveal</span><span class="p">.</span><span class="nx">initialize</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">controls</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">progress</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">history</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">center</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">theme</span><span class="o">:</span> <span class="nx">Reveal</span><span class="p">.</span><span class="nx">getQueryHash</span><span class="p">().</span><span class="nx">theme</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">transition</span><span class="o">:</span> <span class="nx">Reveal</span><span class="p">.</span><span class="nx">getQueryHash</span><span class="p">().</span><span class="nx">transition</span> <span class="o">||</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Optional libraries used to extend on reveal.js</span>
+</span><span class='line'>  <span class="nx">dependencies</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>      <span class="p">{</span> <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;lib/js/classList.js&#39;</span><span class="p">,</span> <span class="nx">condition</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">classList</span><span class="p">;</span> <span class="p">}</span> <span class="p">},</span>
+</span><span class='line'>      <span class="p">{</span> <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;plugin/highlight/highlight.js&#39;</span><span class="p">,</span> <span class="nx">async</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">hljs</span><span class="p">.</span><span class="nx">initHighlightingOnLoad</span><span class="p">();</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="p">]</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>And here you are!!</h2>
+
+<p><a href="http://www.fabriziodammassa.com"><img class="left" src="http://fdammassa.github.com/images/fabriziodammassa.com.png" width="350" title="fabriziodammassa.com" ></a>
+<a href="http://www.fabriziodammassa.com/#/4"><img src="http://fdammassa.github.com/images/skills_expertise.png" width="370" title="Skills and Expertise" ></a></p>
+
+<div style="clear:both">
+</div>
+
+
+<p>Maybe it is still a bit spartan, but it is also effective and that was my first requirement.</p>
+
+<p>If you have ideas or suggestions to improve it, don&#8217;t esistate to share, it&#8217;s still a work in progress&#8230;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A simple git workflow]]></title>
+    <link href="http://fdammassa.github.com/blog/2012/04/24/simple-git-workflow/"/>
+    <updated>2012-04-24T11:49:00+02:00</updated>
+    <id>http://fdammassa.github.com/blog/2012/04/24/simple-git-workflow</id>
+    <content type="html"><![CDATA[<p>I have been working for some years with <a href="http://subversion.apache.org">svn</a> and I was happy with it. But I have to admit that <a href="http://git-scm.com">git</a> is very cool as well and I started using it a couple months ago. No regrets till now :)</p>
+
+<p>In this post I don&#8217;t want to list pros or cons of git versus svn or viceversa but I&#8217;d like to share a very simple worflow I&#8217;ve adopted to manage my live and dev environments and to keep them in sync through git.</p>
+
+<!-- more -->
+
+
+<h2>Setup</h2>
+
+<h3>Live Server</h3>
+
+<p>You need to create a bare repository (that we called newrepo.git) somewhere in your live server. I&#8217;m assuming that the <code>/var/git/repo</code> directory has been previously created.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /var/git/repo
+</span><span class='line'>mkdir newrepo.git
+</span><span class='line'><span class="nb">cd </span>newrepo.git
+</span><span class='line'>git init --bare
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As second step, you should clone the newrepo.git to your webserver root directory, assuming this repo will contain the website files you are working on.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /var/www
+</span><span class='line'>git clone /var/git/repo/newrepo.git newsite
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Development Server</h3>
+
+<p>On your development server, you have to clone the same repository newrepo.git. It is worth to note that the clone has been added the remote url automatically since you are cloning through ssh protocol.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /var/www
+</span><span class='line'>git clone ssh://myuser@myliveserver.com/var/git/repo/newrepo.git newsite
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Deploy local changes</h2>
+
+<h3>Development Server</h3>
+
+<p>First of all, you should to prevent web access to the .git directory (differently from svn, it exitsts only at your clone root) by creating a <code>.htaccess</code> file at the same level of <code>.git</code> folder.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /var/www/newsite
+</span><span class='line'>touch .htaccess
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>.htaccess</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># deny access to the top-level git repository:</span>
+</span><span class='line'>RewriteEngine On
+</span><span class='line'>RewriteRule <span class="se">\.</span>git - <span class="o">[</span>F,L<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now add your first extra-complicated index file :)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">echo</span> <span class="s1">&#39;Hello World!&#39;</span> &gt;&gt; index.html
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And sync the changes with your local repository.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git add .
+</span><span class='line'>git commit -m <span class="s2">&quot;.git folder protected from web access&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Last step consists of pushing local changes to the remote repository (with &#8216;remote repository&#8217; I mean the one on live-server at <code>/var/git/repo/newrepo.git</code> path).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git push origin master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Live Server</h3>
+
+<p>Finally, pull down changes from the newrepo.git repository to the clone in your web server root directory.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /var/www/newsite
+</span><span class='line'>git pull origin master
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AJAX upload on old browsers]]></title>
+    <link href="http://fdammassa.github.com/blog/2012/04/17/ajax-file-upload/"/>
+    <updated>2012-04-17T15:32:00+02:00</updated>
+    <id>http://fdammassa.github.com/blog/2012/04/17/ajax-file-upload</id>
+    <content type="html"><![CDATA[<p>Web browsers supporting only XMLHTTPRequest Level 1 are not so uncommon and if you want to upload file using AJAX you should follow a few simple rules.</p>
+
+<p>There is plenty of <a href="http://superdit.com/2010/06/29/10-jquery-ajax-file-uploader-plugins/">sophisticated libraries</a> to manage ajax file upload. Being a fan of <a href="http://jquery.malsup.com/form/">jqForm</a> that I massively use in the frontend of my applications, I decided to stick on that for this tut.</p>
+
+<!-- more -->
+
+
+<h2>Problem</h2>
+
+<p>Let&#8217;s consider <a href="http://jquery.malsup.com/form/#file-upload">the example</a> on the jqForm website. As explicitly explained, there are some limitations for old browsers when you need to get a JSON response back from server.</p>
+
+<blockquote><p>&#8220;Browsers that support the XMLHttpRequest Level 2 will be able to upload files seamlessly and even get progress updates as the upload proceeds. For older browsers, a fallback technology is used which involves iframes since it is not possible to upload files using the level 1 implmenentation of the XMLHttpRequest object. This is a common fallback technique, but it has inherent limitations. The iframe element is used as the target of the form&#8217;s submit operation which means that the server response is written to the iframe. This is fine if the response type is HTML or XML, but doesn&#8217;t work as well if the response type is script or JSON, both of which often contain characters that need to be repesented using entity references when found in HTML markup.&#8221;</p></blockquote>
+
+<p>Official jqForm documentation suggests to modify the <a href="http://jquery.malsup.com/form/files-raw.php">server side code</a> to let it send back the JSON data between a <code> &lt;textarea&gt; </code> tags.
+I don&#8217;t dislike their solution but I found an alternative that worked worked pretty well in a couple of my web apps and maybe it is simpler.</p>
+
+<h2>Solution</h2>
+
+<h3>Server Side Code (Php)</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// process uploaded file</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// populate $data with the json data to return</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">echo</span> <span class="nx">json_encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, I have voluntarily not specified the response Content-Type to workaround the problem we are addressing.</p>
+
+<h3>Client Side Code (Javascript)</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/Javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'> <span class="c1">// I&#39;m assuming that the form id is &quot;myUploadForm&quot;</span>
+</span><span class='line'> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#myUploadForm&#39;</span><span class="p">).</span><span class="nx">ajaxForm</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">beforeSubmit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">f</span><span class="p">,</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="c1">// show loader gif</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="c1">// here we get raw data, not yet encoded in JSON object</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">json_data</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">try</span><span class="p">{</span>
+</span><span class='line'>              <span class="nx">json_data</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">parseJSON</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span><span class='line'>              <span class="c1">// make something with json_data</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">{</span>
+</span><span class='line'>              <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Ops, something went wrong :(&#39;</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">complete</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>          <span class="c1">// hide loader gif</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">error</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">jqXHR</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">errorThrown</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>          <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Ops, something went wrong :(&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Don&#8217;t set the Content-Type in the server response and let jQuery intelligently guess the response content type ( take a look at <a href="http://api.jquery.com/jQuery.ajax/">datatype</a> option specifications ).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Yii and jQuery Form plugin]]></title>
+    <link href="http://fdammassa.github.com/blog/2012/04/13/yii-jqform/"/>
+    <updated>2012-04-13T11:14:00+02:00</updated>
+    <id>http://fdammassa.github.com/blog/2012/04/13/yii-jqform</id>
+    <content type="html"><![CDATA[<p><a href="http://www.yiiframework.com">Yii</a> is a <em>&#8220;Fast, Secure and Professional PHP framework&#8221;</em>.</p>
+
+<p>Among the interesting features offered by Yii, there is one that has been a real headache: the form widget and the client-side validation.
+Yii framework allows you to define validation rules in the model classes and then it generates the javascript code to perform validation also on the client. The js code is generated on <a href="http://www.yiiframework.com/doc/api/1.1/CActiveForm">CActiveForm</a> widget rendering. When the user submits the form, the validatio code is executed on the browser and if everything is fine, the data are sent to the server.</p>
+
+<!-- more -->
+
+
+<h2>Problem</h2>
+
+<p>Till now, everything looks awesome, but at some point I needed to let <a href="http://jquery.malsup.com/form/">jqForm</a> jQuery plugin to handle the Ajax form submission. <strong>BUT</strong> I would love to keep the Yii generated javascript validation. <strong> AND </strong> I don&#8217;t want to change the Yii javascript library code.</p>
+
+<h2>Solution</h2>
+
+<p><strong> EVENTS!! </strong> Yes, the Yii form widget allows you to specify a javascript function that is called after client-side validation.
+This is what should happend once the Yii submit listener intercepts the submit button click event:</p>
+
+<ul>
+<li>prevents default form submission</li>
+<li>validate user input</li>
+<li>executes the &#8220;afterValidate&#8221; function, if any</li>
+<li>if validation is ok, it submits the form to the server</li>
+</ul>
+
+
+<p>The &#8220;afterValidate&#8221; function should be designed to perform at least three tasks:</p>
+
+<ul>
+<li>check that the validation was successful</li>
+<li>if user inputs have been validated, submit the form using jqForm plugin</li>
+<li>prevent the form submission by the Yii javascript library</li>
+</ul>
+
+
+<h3>Import jqForm library</h3>
+
+<p>In the form view file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">app</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">clientScript</span><span class="o">-&gt;</span><span class="na">registerScriptFile</span><span class="p">(</span><span class="s1">&#39;/js/jquery.form.js&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This code tells Yii to include the <em>jquery.form.js</em> file in the html page header.</p>
+
+<h3>Define afterValidate function</h3>
+
+<p>In the form view file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Yii</span><span class="o">::</span><span class="na">app</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">clientScript</span><span class="o">-&gt;</span><span class="na">registerScript</span><span class="p">(</span><span class="s1">&#39;yiijqform&#39;</span><span class="p">,</span> <span class="s2">&quot;</span>
+</span><span class='line'><span class="s2">   function myAfterValidateFunction(form, data, hasError)</span>
+</span><span class='line'><span class="s2">   {</span>
+</span><span class='line'><span class="s2">        if(!hasError)</span>
+</span><span class='line'><span class="s2">        {</span>
+</span><span class='line'><span class="s2">            $(form).ajaxSubmit({</span>
+</span><span class='line'><span class="s2">                dataType: &#39;json&#39;,</span>
+</span><span class='line'><span class="s2">                timeout: 10000,                </span>
+</span><span class='line'><span class="s2">                success: function(data)</span>
+</span><span class='line'><span class="s2">                {</span>
+</span><span class='line'><span class="s2">                 // do something</span>
+</span><span class='line'><span class="s2">                },</span>
+</span><span class='line'><span class="s2">                error: function(xhr)</span>
+</span><span class='line'><span class="s2">                {</span>
+</span><span class='line'><span class="s2">                 alert(&#39;ops...&#39;);</span>
+</span><span class='line'><span class="s2">                }</span>
+</span><span class='line'><span class="s2">            });</span>
+</span><span class='line'><span class="s2">        }</span>
+</span><span class='line'><span class="s2">        return false;</span>
+</span><span class='line'><span class="s2">   }</span>
+</span><span class='line'><span class="s2">       </span>
+</span><span class='line'><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">CClientScript</span><span class="o">::</span><span class="na">POS_HEAD</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When the myAfterValidateFunction is invoked, the form is Ajax submitted through the ajaxSubmit function defined in the jqForm plugin. Please be sure to check for the <code>hasError</code> paramter that contains the result of the client-side validation. If it is <code>false</code>, the form shouldn&#8217;t be submitted to the server.</p>
+
+<p>The <code>return false</code> at the end of the function body prevents the flow of Yii javascript form submission handler to be resumed. Otherwise, the form would be submitted twice!</p>
+
+<h3>Attach function to afterValidate event</h3>
+
+<p>In the form view file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="nv">$form</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">beginWidget</span><span class="p">(</span><span class="s1">&#39;CActiveForm&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;id&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;myform_id&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;action&#39;</span><span class="o">=&gt;</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;/my/action&#39;</span><span class="p">),</span>
+</span><span class='line'>    <span class="s1">&#39;enableClientValidation&#39;</span><span class="o">=&gt;</span><span class="k">true</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;clientOptions&#39;</span><span class="o">=&gt;</span><span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;validateOnSubmit&#39;</span><span class="o">=&gt;</span><span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;validateOnChange&#39;</span><span class="o">=&gt;</span><span class="k">false</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;afterValidate&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;js:myAfterValidateFunction&#39;</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'><span class="p">));</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, attaching a javascript function to afterValidate event is pretty simple using the CActiveForm widget options.</p>
+
+<h3>Final thoughts</h3>
+
+<p>As you can see, integrating jqForm with Yii javascript libraries is quite easy once you know how to hook your code without touching framework core files. Fortunately Yii framework is very well documented and the source code can be understood by experienced Php developers. If you know more elegant ways to accomplish this task, please drop me a line via e-mail or comment below.</p>
+]]></content>
+  </entry>
+  
+</feed>
