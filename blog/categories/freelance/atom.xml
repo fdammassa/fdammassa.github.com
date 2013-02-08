@@ -4,7 +4,7 @@
   <title><![CDATA[Category: freelance | Fabrizio D'Ammassa]]></title>
   <link href="http://fdammassa.github.com/blog/categories/freelance/atom.xml" rel="self"/>
   <link href="http://fdammassa.github.com/"/>
-  <updated>2013-02-08T12:59:47+01:00</updated>
+  <updated>2013-02-08T13:56:20+01:00</updated>
   <id>http://fdammassa.github.com/</id>
   <author>
     <name><![CDATA[Fabrizio D'Ammassa]]></name>
@@ -40,6 +40,9 @@
 
 
 <p><a href="http://lab.hakim.se/reveal-js/" title="Reveal.js">Reveal.js</a> was the answer!</p>
+
+<!-- more -->
+
 
 <p>After a rapid prototyping of the required sections of the site, I could set up my new website in a couple of hours, just 10 lines of javascript and well structured HTML5 code
 <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Reveal.js initialization  </span></figcaption>
